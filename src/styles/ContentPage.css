@@ -1,0 +1,180 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.back-link {
+  display: inline-block;
+  color: #60a5fa;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: rgba(30, 41, 59, 0.8);
+  margin-bottom: 30px;
+}
+
+.back-link:hover {
+  background: rgba(30, 41, 59, 1);
+}
+
+.content-card {
+  background: rgba(30, 41, 59, 0.9);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  text-align: left;
+  flex: 1;
+}
+
+.content-card h1, 
+.content-card h2, 
+.content-card h3, 
+.content-card h4 {
+  color: #f1f5f9;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.content-card h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.content-card h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #60a5fa;
+  margin-top: 30px;
+}
+
+.content-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 25px;
+}
+
+.content-card h4 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.content-card p {
+  color: #cbd5e1;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.content-card b {
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+.content-card ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.content-card li {
+  color: #cbd5e1;
+  margin-bottom: 8px;
+}
+
+.content-card a {
+  color: #60a5fa;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.content-card a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 15px;
+  }
+  
+  .content-card {
+    padding: 20px;
+  }
+  
+  .content-card h1 {
+    font-size: 26px;
+  }
+  
+  .content-card h2 {
+    font-size: 18px;
+    margin-top: 24px;
+  }
+
+  .content-card h3 {
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  .content-card h4 {
+    font-size: 15px;
+    margin-top: 16px;
+  }
+
+  .content-card p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .content-card ul {
+    margin-left: 16px;
+  }
+
+  .content-card li {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 10px;
+  }
+  
+  .content-card {
+    padding: 16px;
+  }
+  
+  .content-card h1 {
+    font-size: 22px;
+  }
+  
+  .content-card h2 {
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  .content-card h3 {
+    font-size: 14px;
+    margin-top: 16px;
+  }
+
+  .content-card p {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .back-link {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}

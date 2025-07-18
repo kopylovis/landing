@@ -1,0 +1,11 @@
+# Default ignored files
+/.idea
+/.yarn/cache
+/.yarn/unplugged
+/.yarn/install-state.gz
+/.pnp.*
+/node_modules
+/dist
+
+# Keep yarn releases
+!.yarn/releases
