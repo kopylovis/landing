@@ -4,7 +4,7 @@ import '../styles/Footer.css'
 export default function Footer() {
   return (
     <footer className="footer">
-      <p>&copy; 2025 Ivan Kopylov. All rights reserved.</p>
+      <p>&copy; 2026 Ivan Kopylov. All rights reserved.</p>
       <div className="footer-links">
         <Link to="/privacy">Privacy Policy</Link>
         <Link to="/terms">Terms of Service</Link>
