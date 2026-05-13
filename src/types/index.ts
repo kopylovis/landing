@@ -17,18 +17,13 @@ export interface SEOData {
 export interface AppData {
   id: string
   name: string
-  description: string
   image: string
   platforms: Platform[]
   links: AppLinks
-  features?: string[]
-  category?: string
-  version?: string
-  lastUpdated?: string
 }
 
 export interface Platform {
-  name: 'iOS' | 'Android' | 'Web' | 'Desktop'
+  name: 'iOS' | 'Android' | 'Web' | 'Desktop' | 'Ruby'
   icon: string
   available: boolean
 }
@@ -38,6 +33,7 @@ export interface AppLinks {
   googlePlay?: string
   ruStore?: string
   github?: string
+  rubygems?: string
   website?: string
 }
 
@@ -64,6 +60,13 @@ export interface AppCardProps {
   app: AppData
   className?: string
   onClick?: () => void
+}
+
+// Localized project copy — provided by the i18n layer per project id
+export interface ProjectCopy {
+  category: string
+  description: string
+  features: string[]
 }
 
 export interface FooterProps {

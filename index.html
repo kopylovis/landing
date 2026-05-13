@@ -2,43 +2,70 @@
 <html lang="en" prefix="og: http://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Monoroh - Mobile App Developer</title>
-    <meta name="description" content="Crafting seamless multiplatform experiences with elegant code. Specialized in Kotlin Multiplatform and native iOS/Android development." />
-    <meta name="keywords" content="Mobile App Developer, Kotlin Multiplatform, iOS, Android, App Development" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Monoroh — Mobile App Developer</title>
+    <meta name="description" content="Mobile engineer crafting multiplatform products that feel native. Kotlin Multiplatform, iOS &amp; Android — shipped." />
+    <meta name="keywords" content="Mobile App Developer, Kotlin Multiplatform, iOS, Android, App Development, Compose Multiplatform, SwiftUI" />
     <meta name="author" content="Monoroh" />
-    
+    <meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)" />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://monoroh.com/" />
-    <meta property="og:title" content="Monoroh - Mobile App Developer" />
-    <meta property="og:description" content="Crafting seamless multiplatform experiences with elegant code. Specialized in Kotlin Multiplatform and native iOS/Android development." />
+    <meta property="og:title" content="Monoroh — Mobile App Developer" />
+    <meta property="og:description" content="Mobile engineer crafting multiplatform products that feel native." />
     <meta property="og:image" content="https://monoroh.com/media/develop_logo_512x512.png" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
     <meta property="og:site_name" content="Monoroh Developer" />
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://monoroh.com/" />
-    <meta property="twitter:title" content="Monoroh - Mobile App Developer" />
-    <meta property="twitter:description" content="Crafting seamless multiplatform experiences with elegant code. Specialized in Kotlin Multiplatform and native iOS/Android development." />
+    <meta property="twitter:title" content="Monoroh — Mobile App Developer" />
+    <meta property="twitter:description" content="Mobile engineer crafting multiplatform products that feel native." />
     <meta property="twitter:image" content="https://monoroh.com/media/develop_logo_512x512.png" />
-    
+
     <!-- Telegram -->
-    <meta name="telegram:channel" content="@mnrhvd" />
-    
+    <meta name="telegram:channel" content="@monoroh" />
+
     <link rel="icon" type="image/png" sizes="32x32" href="/media/develop_favicon.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/media/develop_logo_512x512.png" />
+
+    <!-- Inter via rsms (loaded eagerly by globals.css) -->
+    <link rel="preconnect" href="https://rsms.me" crossorigin />
+
+    <!-- Prevent FOUC: apply persisted theme and locale before paint -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('monoroh:theme');
+          var theme = stored === 'light' || stored === 'dark' ? stored
+            : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+        try {
+          var storedLang = localStorage.getItem('monoroh:locale');
+          var locale = storedLang === 'en' || storedLang === 'ru' ? storedLang
+            : ((navigator.language || 'en').toLowerCase().indexOf('ru') === 0 ? 'ru' : 'en');
+          document.documentElement.setAttribute('lang', locale);
+        } catch (e) {
+          document.documentElement.setAttribute('lang', 'en');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    
+
     <!-- GitHub Pages SPA redirect handler -->
     <script>
-      // Check if we have a redirect from GitHub Pages 404.html
       (function(l) {
         if (l.search[1] === '/' ) {
-          var decoded = l.search.slice(1).split('&').map(function(s) { 
+          var decoded = l.search.slice(1).split('&').map(function(s) {
             return s.replace(/~and~/g, '&')
           }).join('?');
           window.history.replaceState(null, null,
@@ -47,7 +74,7 @@
         }
       }(window.location))
     </script>
-    
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -2,56 +2,55 @@ import { render, waitFor } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import NotFound from '../../pages/NotFound'
+import { I18nProvider } from '../../contexts/I18nContext'
 
-describe('NotFound Component', () => {
-  const renderWithProviders = (ui: React.ReactElement) => {
-    return render(
+describe('NotFound page', () => {
+  const renderWithProviders = (ui: React.ReactElement) =>
+    render(
       <HelmetProvider>
-        <BrowserRouter>
-          {ui}
-        </BrowserRouter>
+        <I18nProvider>
+          <BrowserRouter>{ui}</BrowserRouter>
+        </I18nProvider>
       </HelmetProvider>
     )
-  }
 
-  it('renders 404 page with correct content', async () => {
+  it('renders 404 page with primary content', () => {
     renderWithProviders(<NotFound />)
 
-    // Check if main content is rendered
-    const title = document.querySelector('.error-title')
-    expect(title).toHaveTextContent('404')
+    const badge = document.querySelector('.not-found__badge')
+    expect(badge).toHaveTextContent('404')
 
-    const subtitle = document.querySelector('.error-subtitle')
-    expect(subtitle).toHaveTextContent('Page Not Found')
+    const title = document.querySelector('.not-found__title')
+    expect(title).toBeInTheDocument()
 
-    // Check if navigation links are present
-    const homeLink = document.querySelector('a[href="/"]')
-    expect(homeLink).toHaveTextContent('Go Home')
+    const homeLink = document.querySelector('a.btn-primary[href="/"]')
+    expect(homeLink).toHaveTextContent(/back to home/i)
   })
 
   it('sets proper SEO meta tags', async () => {
     renderWithProviders(<NotFound />)
 
-    // Wait for Helmet to update the DOM
     await waitFor(() => {
-      expect(document.title).toBe('Page Not Found - 404 - Monoroh')
+      expect(document.title).toBe('Page Not Found - Monoroh')
     })
 
     const metaDescription = document.querySelector('meta[name="description"]')
-    expect(metaDescription).toHaveAttribute('content', "The page you're looking for doesn't exist. Return to the homepage to explore our mobile applications.")
+    expect(metaDescription).toHaveAttribute(
+      'content',
+      "The page you're looking for doesn't exist. Head back home to explore our work."
+    )
   })
 
-  it('displays navigation suggestions', () => {
+  it('shows navigation suggestions', () => {
     renderWithProviders(<NotFound />)
 
-    const suggestions = document.querySelector('.error-suggestions')
+    const suggestions = document.querySelector('.not-found__hint')
     expect(suggestions).toBeInTheDocument()
 
-    const suggestionsList = document.querySelectorAll('.error-suggestions ul li')
-    expect(suggestionsList).toHaveLength(3)
+    const items = document.querySelectorAll('.not-found__hint ul li')
+    expect(items).toHaveLength(3)
 
-    // Check if all suggested links are present
-    expect(document.querySelector('a[href="/?scroll=applications"]')).toBeInTheDocument()
+    expect(document.querySelector('a[href="/#work"]')).toBeInTheDocument()
     expect(document.querySelector('a[href="/authmeister"]')).toBeInTheDocument()
     expect(document.querySelector('a[href="https://sympee.ru"]')).toBeInTheDocument()
   })

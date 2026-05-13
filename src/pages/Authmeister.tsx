@@ -1,101 +1,148 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import SEO from '../components/SEO'
+import { useI18n } from '../hooks/useI18n'
+import { projects } from '../data/projects'
 import '../styles/AuthmeisterPage.css'
 
-export default function Authmeister() {
-  useEffect(() => {
-    document.title = 'Authmeister - OTP Authenticator'
-    
-    const metaDescription = document.querySelector('meta[name="description"]')
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'A modern OTP authenticator supporting both TOTP and HOTP standards. Seamlessly migrate from other authenticators including Google Authenticator with otpauth-migration support.')
-    }
+type DetectedOS = 'android' | 'ios' | 'desktop'
 
-    const showAppropriateStoreButtons = () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera || ''
-      let os = 'desktop'
-      
-      if (/android/i.test(userAgent)) {
-        os = 'android'
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } else if (/iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream) {
-        os = 'ios'
-      }
-      
-      const storeButtons = document.querySelectorAll('.store-buttons')
-      
-      storeButtons.forEach(storeButtonsContainer => {
-        const googlePlayLink = storeButtonsContainer.querySelector('a[href*="play.google.com"]')
-        const appStoreLink = storeButtonsContainer.querySelector('a[href*="apps.apple.com"]')
-        const ruStoreLink = storeButtonsContainer.querySelector('a[href*="rustore.ru"]')
-        
-        if (os === 'android') {
-          if (googlePlayLink) (googlePlayLink as HTMLElement).style.display = 'block'
-          if (appStoreLink) (appStoreLink as HTMLElement).style.display = 'none'
-          if (ruStoreLink) (ruStoreLink as HTMLElement).style.display = 'block'
-        } else if (os === 'ios') {
-          if (googlePlayLink) (googlePlayLink as HTMLElement).style.display = 'none'
-          if (appStoreLink) (appStoreLink as HTMLElement).style.display = 'block'
-          if (ruStoreLink) (ruStoreLink as HTMLElement).style.display = 'none'
-        } else {
-          if (googlePlayLink) (googlePlayLink as HTMLElement).style.display = 'block'
-          if (appStoreLink) (appStoreLink as HTMLElement).style.display = 'block'
-          if (ruStoreLink) (ruStoreLink as HTMLElement).style.display = 'block'
-        }
-      })
-    }
-    
-    showAppropriateStoreButtons()
+function detectOS(): DetectedOS {
+  if (typeof navigator === 'undefined') return 'desktop'
+  const ua = navigator.userAgent || ''
+  if (/android/i.test(ua)) return 'android'
+  if (/iPad|iPhone|iPod/.test(ua)) return 'ios'
+  return 'desktop'
+}
+
+const authmeister = projects.find((p) => p.id === 'authmeister')!
+
+export default function Authmeister() {
+  const [os, setOs] = useState<DetectedOS>('desktop')
+  const { t, locale } = useI18n()
+
+  useEffect(() => {
+    setOs(detectOS())
   }, [])
 
+  const stores = [
+    { key: 'googlePlay', href: authmeister.links.googlePlay, src: '/media/googleplay.svg', alt: 'Google Play' },
+    { key: 'appStore', href: authmeister.links.appStore, src: '/media/appstore.svg', alt: 'App Store' },
+    { key: 'ruStore', href: authmeister.links.ruStore, src: '/media/rustore.svg', alt: 'RuStore' },
+  ].filter((s) => s.href) as Array<{ key: string; href: string; src: string; alt: string }>
+
+  const visibleStores = stores.filter(({ key }) => {
+    if (os === 'desktop') return true
+    if (os === 'android') return key === 'googlePlay' || key === 'ruStore'
+    if (os === 'ios') return key === 'appStore'
+    return true
+  })
+
   return (
-    <div className="authmeister-page">
-      <Link to="/" className="back-link">← Back to Portfolio</Link>
-      
-      <div className="hero-section">
-        <div className="app-card">
-          <div className="app-header">
-            <img src="/media/authmeister_512x512.png" alt="Authmeister Icon" className="app-icon" />
-            <div className="app-info">
-              <h1>Authmeister</h1>
-              <p className="app-category">Security & Authentication</p>
+    <>
+      <SEO
+        title="Authmeister — Modern OTP Authenticator"
+        description={t.projects.authmeister.description}
+        url="/authmeister"
+        type="website"
+        locale={locale}
+      />
+
+      <div className="product">
+        <div className="container">
+          <Link to="/" className="product__back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            {t.authmeisterPage.back}
+          </Link>
+
+          <header className="product__hero">
+            <div className="product__hero-text">
+              <span className="eyebrow">{t.projects.authmeister.category}</span>
+              <h1 className="product__title">Authmeister</h1>
+              <p className="product__tagline">{t.authmeisterPage.tagline}</p>
+
+              <div className="product__cta-row">
+                {visibleStores.map((s) => (
+                  <a
+                    key={s.key}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="product__store"
+                    aria-label={`Download on ${s.alt}`}
+                  >
+                    <img src={s.src} alt={s.alt} height={44} />
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
-          
-          <p className="app-description">
-            A modern OTP authenticator supporting both TOTP and HOTP standards. 
-            Seamlessly migrate from other authenticators including Google Authenticator 
-            with otpauth-migration support.
-          </p>
-          
-          <ul className="app-features">
-            <li>TOTP & HOTP Support</li>
-            <li>Google Authenticator Migration</li>
-            <li>Secure Encrypted Storage</li>
-            <li>Clean, Intuitive Interface</li>
-            <li>Backup & Restore</li>
-            <li>Dark & Light Themes</li>
-          </ul>
-          
-          <div className="store-buttons">
-            <a href="https://play.google.com/store/apps/details?id=com.kopylovis.authmeister" target="_blank" rel="noopener noreferrer">
-              <img src="/media/googleplay.svg" alt="Get it on Google Play" />
-            </a>
-            <a href="https://apps.apple.com/app/id6742833866" target="_blank" rel="noopener noreferrer">
-              <img src="/media/appstore.svg" alt="Download on the App Store" />
-            </a>
-            <a href="https://www.rustore.ru/catalog/app/com.kopylovis.authmeister" target="_blank" rel="noopener noreferrer">
-              <img src="/media/rustore.svg" alt="Download on the Ru Store" />
-            </a>
-          </div>
-          
-          <div className="links">
-            <Link to="/authmeister/privacy">Privacy Policy</Link>
-            <Link to="/authmeister/terms">Terms and Conditions</Link>
-          </div>
+
+            <figure className="product__hero-art" aria-hidden="true">
+              <div className="product__hero-glow" />
+              <img
+                src={authmeister.image}
+                alt=""
+                width={220}
+                height={220}
+                className="product__hero-icon"
+              />
+            </figure>
+          </header>
+
+          <dl className="product__specs">
+            {t.authmeisterPage.specs.map((s) => (
+              <div key={s.label} className="product__specs-item">
+                <dt>{s.label}</dt>
+                <dd>{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <section className="product__section" aria-labelledby="features-title">
+            <span className="eyebrow">{t.authmeisterPage.featuresEyebrow}</span>
+            <h2 id="features-title" className="product__section-title">
+              {t.authmeisterPage.featuresTitle}
+            </h2>
+
+            <div className="product__highlights">
+              {t.authmeisterPage.highlights.map((h, i) => (
+                <article key={h.title} className="product__highlight">
+                  <span className="product__highlight-num">{String(i + 1).padStart(2, '0')}</span>
+                  <h3>{h.title}</h3>
+                  <p>{h.body}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="product__final" aria-labelledby="final-title">
+            <h2 id="final-title">{t.authmeisterPage.finalTitle}</h2>
+            <p>{t.authmeisterPage.finalBody}</p>
+            <div className="product__cta-row">
+              {visibleStores.map((s) => (
+                <a
+                  key={s.key}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="product__store"
+                  aria-label={`Download on ${s.alt}`}
+                >
+                  <img src={s.src} alt={s.alt} height={44} />
+                </a>
+              ))}
+            </div>
+
+            <nav className="product__legal" aria-label="Authmeister legal">
+              <Link to="/authmeister/privacy">{t.authmeisterPage.legalPrivacy}</Link>
+              <span aria-hidden="true">·</span>
+              <Link to="/authmeister/terms">{t.authmeisterPage.legalTerms}</Link>
+            </nav>
+          </section>
         </div>
       </div>
-    </div>
+    </>
   )
 }

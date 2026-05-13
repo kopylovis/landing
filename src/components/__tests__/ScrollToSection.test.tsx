@@ -1,45 +1,46 @@
 import { render } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
-import Home from '../../pages/Home'
 import { HelmetProvider } from 'react-helmet-async'
 import { vi } from 'vitest'
+import Home from '../../pages/Home'
+import { ThemeProvider } from '../../contexts/ThemeContext'
+import { I18nProvider } from '../../contexts/I18nContext'
 
-// Mock scrollIntoView
 const mockScrollIntoView = vi.fn()
 Object.defineProperty(Element.prototype, 'scrollIntoView', {
   value: mockScrollIntoView,
   writable: true,
 })
 
-describe('Scroll to Section Functionality', () => {
-  const renderWithProviders = () => {
-    return render(
+describe('Home page sections', () => {
+  const renderHome = () =>
+    render(
       <HelmetProvider>
-        <BrowserRouter>
-          <Home />
-        </BrowserRouter>
+        <ThemeProvider>
+          <I18nProvider>
+            <BrowserRouter>
+              <Home />
+            </BrowserRouter>
+          </I18nProvider>
+        </ThemeProvider>
       </HelmetProvider>
     )
-  }
 
   beforeEach(() => {
     vi.clearAllMocks()
   })
 
-  it('renders applications section with correct ID', () => {
-    renderWithProviders()
-    
-    const appsSection = document.getElementById('applications-section')
-    expect(appsSection).toBeInTheDocument()
-    expect(appsSection).toHaveClass('apps-section')
+  it('exposes the #work anchor for scroll targeting', () => {
+    renderHome()
+    const work = document.getElementById('work')
+    expect(work).toBeInTheDocument()
+    expect(work).toHaveClass('apps')
   })
 
-  it('contains scroll functionality hook', () => {
-    renderWithProviders()
-    
-    // Just verify the component renders without errors
-    // The scroll functionality is tested by the presence of the ID
-    const appsSection = document.getElementById('applications-section')
-    expect(appsSection).toBeInTheDocument()
+  it('exposes the #about anchor for scroll targeting', () => {
+    renderHome()
+    const about = document.getElementById('about')
+    expect(about).toBeInTheDocument()
+    expect(about).toHaveClass('about')
   })
 })

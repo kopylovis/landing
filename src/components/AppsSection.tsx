@@ -1,82 +1,43 @@
 import { useNavigate } from 'react-router-dom'
+import { projects } from '../data/projects'
+import { useI18n } from '../hooks/useI18n'
+import { useReveal } from '../hooks/useReveal'
 import AppCard from './AppCard'
-import { AppData, AppsSectionProps } from '../types'
+import { AppsSectionProps } from '../types'
 import '../styles/AppsSection.css'
 
-export default function AppsSection({ title, subtitle, apps: propApps }: AppsSectionProps) {
+export default function AppsSection({ apps: propApps }: AppsSectionProps) {
+  const apps = propApps || projects
   const navigate = useNavigate()
-
-  const defaultApps: AppData[] = [
-    {
-      id: 'authmeister',
-      name: "Authmeister",
-      category: "Security & Authentication",
-      description: "A modern OTP authenticator supporting both TOTP and HOTP standards. Seamlessly migrate from other authenticators including Google Authenticator with otpauth-migration support.",
-      image: "/media/authmeister_512x512.png",
-      platforms: [
-        { name: 'Android', icon: '/media/googleplay.svg', available: true },
-        { name: 'iOS', icon: '/media/appstore.svg', available: true }
-      ],
-      links: {
-        googlePlay: "https://play.google.com/store/apps/details?id=com.kopylovis.authmeister",
-        appStore: "https://apps.apple.com/app/id6742833866",
-        ruStore: "https://www.rustore.ru/catalog/app/com.kopylovis.authmeister"
-      },
-      features: [
-        "TOTP & HOTP support",
-        "Google Authenticator migration",
-        "Secure encrypted storage",
-        "Clean, intuitive interface",
-        "Backup & restore functionality"
-      ]
-    },
-    {
-      id: 'sympee',
-      name: "Sympee",
-      category: "Gifting & Services",
-      description: "A compliments platform where you can surprise friends with services and goods from partner businesses. Send coffee, haircuts, or other treats to loved ones in any city through QR codes.",
-      image: "/media/sympee_512x512.png",
-      platforms: [
-        { name: 'Android', icon: '/media/googleplay.svg', available: true },
-        { name: 'iOS', icon: '/media/appstore.svg', available: true }
-      ],
-      links: {
-        googlePlay: "https://play.google.com/store/apps/details?id=ru.sympee.mobile",
-        appStore: "https://apps.apple.com/app/id6742376781",
-        ruStore: "https://www.rustore.ru/catalog/app/ru.sympee.mobile",
-        website: "https://sympee.ru"
-      },
-      features: [
-        "Gift services to friends remotely",
-        "QR code redemption system",
-        "Partner business network",
-        "Cross-city gifting",
-        "Surprise & delight experience"
-      ]
-    }
-  ]
-
-  const apps = propApps || defaultApps
+  const header = useReveal<HTMLDivElement>()
+  const { t } = useI18n()
 
   const handleAppClick = (appId: string) => {
-    if (appId === 'authmeister') {
-      navigate('/authmeister')
-    }
+    if (appId === 'authmeister') navigate('/authmeister')
   }
 
   return (
-    <section id="applications-section" className="apps-section">
-      <h2 className="section-title">{title || "Featured Applications"}</h2>
-      <p className="section-subtitle">{subtitle || "Innovative solutions that make a difference"}</p>
+    <section id="work" className="apps section" aria-labelledby="apps-title">
+      <div className="container">
+        <div ref={header.ref} className="reveal apps__header" data-visible={header.visible}>
+          <div>
+            <span className="eyebrow">{t.apps.eyebrowPrefix} · {apps.length.toString().padStart(2, '0')}</span>
+            <h2 id="apps-title" className="apps__title">{t.apps.title}</h2>
+          </div>
+          <p className="apps__subtitle">{t.apps.subtitle}</p>
+        </div>
 
-      <div className="apps-grid">
-        {apps.map((app) => (
-          <AppCard
-            key={app.id}
-            app={app}
-            onClick={() => handleAppClick(app.id)}
-          />
-        ))}
+        <div className="apps__grid">
+          {apps.map((app, index) => (
+            <AppCard
+              key={app.id}
+              app={app}
+              variant="featured"
+              onClick={() => handleAppClick(app.id)}
+              index={index}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )

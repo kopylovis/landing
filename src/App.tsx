@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
+import { ThemeProvider } from './contexts/ThemeContext'
+import { I18nProvider } from './contexts/I18nContext'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import Privacy from './pages/Privacy'
@@ -13,19 +15,23 @@ import './styles/globals.css'
 function App() {
   return (
     <HelmetProvider>
-      <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/authmeister" element={<Authmeister />} />
-            <Route path="/authmeister/privacy" element={<AuthmeisterPrivacy />} />
-            <Route path="/authmeister/terms" element={<AuthmeisterTerms />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
-      </Router>
+      <ThemeProvider>
+        <I18nProvider>
+          <Router>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/authmeister" element={<Authmeister />} />
+                <Route path="/authmeister/privacy" element={<AuthmeisterPrivacy />} />
+                <Route path="/authmeister/terms" element={<AuthmeisterTerms />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
+          </Router>
+        </I18nProvider>
+      </ThemeProvider>
     </HelmetProvider>
   )
 }

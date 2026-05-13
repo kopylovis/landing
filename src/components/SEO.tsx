@@ -22,7 +22,7 @@ export default function SEO({
   type = 'website',
   siteName = 'Monoroh Developer',
   locale = 'en_US',
-  twitterHandle = '@mnrhvd',
+  twitterHandle = '@monoroh',
   keywords,
   author = 'Monoroh',
   canonical
@@ -30,6 +30,7 @@ export default function SEO({
   const fullTitle = title.includes('Monoroh') ? title : `${title} - Monoroh`
   const fullUrl = url.startsWith('http') ? url : `https://monoroh.com${url}`
   const canonicalUrl = canonical || fullUrl
+  const ogLocale = locale === 'ru' ? 'ru_RU' : locale === 'en_US' ? 'en_US' : locale
 
   return (
     <Helmet>
@@ -54,7 +55,7 @@ export default function SEO({
       <meta property="og:image:width" content="512" />
       <meta property="og:image:height" content="512" />
       <meta property="og:site_name" content={siteName} />
-      <meta property="og:locale" content={locale} />
+      <meta property="og:locale" content={ogLocale} />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -77,7 +78,7 @@ export default function SEO({
       <link rel="apple-touch-icon" sizes="512x512" href="/media/develop_logo_512x512.png" />
       
       {/* Telegram */}
-      <meta name="telegram:channel" content="@mnrhvd" />
+      <meta name="telegram:channel" content="@monoroh" />
     </Helmet>
   )
 }
