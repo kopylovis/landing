@@ -124,6 +124,8 @@
   letter-spacing: -0.025em;
   line-height: 1.15;
   color: var(--ink);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .app-card--featured .app-card__name {
