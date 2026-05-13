@@ -38,10 +38,6 @@ export default function HeroSection() {
             {t.hero.lede.intro} {t.hero.lede.name}
             {t.hero.lede.between1}
             <span className="hero__lede-strong">{t.hero.lede.strong}</span>
-            {t.hero.lede.between2}
-            <a href="/authmeister">Authmeister</a>
-            {t.hero.lede.between3}
-            <a href="https://sympee.ru" target="_blank" rel="noopener noreferrer">Sympee</a>
             {t.hero.lede.trailing}
           </p>
 
