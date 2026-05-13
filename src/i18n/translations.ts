@@ -129,9 +129,9 @@ export const en: Translations = {
     lede: {
       intro: "I'm",
       name: 'Ivan Kopylov',
-      between1: ' — building production apps with ',
+      between1: ' — shipping production apps with ',
       strong: 'Kotlin Multiplatform',
-      trailing: ' and native iOS / Android.',
+      trailing: ' across iOS, Android, desktop and web.',
     },
     ctaWork: 'See selected work',
     ctaContact: 'Get in touch',
@@ -164,7 +164,7 @@ export const en: Translations = {
       {
         title: 'Share by default, native when it earns it',
         body:
-          'Compose Multiplatform carries shared UI across iOS, Android and desktop. Drop down to SwiftUI or native Compose when a specific screen genuinely calls for it.',
+          'Compose Multiplatform carries shared UI across iOS, Android, desktop and web. Drop down to SwiftUI or native Compose when a specific screen genuinely calls for it.',
       },
       {
         title: 'Ship & measure',
@@ -180,7 +180,7 @@ export const en: Translations = {
 
   stack: [
     { name: 'Kotlin Multiplatform', detail: 'Shared business logic across platforms' },
-    { name: 'Compose Multiplatform', detail: 'Shared UI on top of KMP — one Compose for iOS, Android & desktop' },
+    { name: 'Compose Multiplatform', detail: 'Shared UI on top of KMP — one Compose across iOS, Android, desktop and web' },
     { name: 'Android · Kotlin', detail: 'Jetpack Compose, coroutines, modern Android' },
     { name: 'iOS · Swift', detail: 'SwiftUI first, UIKit when it earns its place' },
     { name: 'Flutter', detail: 'When cross-platform speed wins the trade-off' },
@@ -430,9 +430,9 @@ export const ru: Translations = {
     lede: {
       intro: 'Я —',
       name: 'Иван Копылов',
-      between1: '. Десять лет делаю мобильное в проде: ',
+      between1: '. Десять лет в проде на ',
       strong: 'Kotlin Multiplatform',
-      trailing: ' плюс нативные iOS / Android.',
+      trailing: ' — iOS, Android, десктоп и веб.',
     },
     ctaWork: 'Смотреть проекты',
     ctaContact: 'Написать',
@@ -465,7 +465,7 @@ export const ru: Translations = {
       {
         title: 'Шарим UI, нативно — где это правда нужно',
         body:
-          'Compose Multiplatform тащит общий UI на iOS, Android и десктоп. Спускаюсь в SwiftUI или нативный Compose только там, где конкретный экран это реально заслужил.',
+          'Compose Multiplatform тащит общий UI на iOS, Android, десктоп и веб. Спускаюсь в SwiftUI или нативный Compose только там, где конкретный экран это реально заслужил.',
       },
       {
         title: 'Релизить и мерить',
@@ -481,7 +481,7 @@ export const ru: Translations = {
 
   stack: [
     { name: 'Kotlin Multiplatform', detail: 'Бизнес-логика — одна, на всех платформах' },
-    { name: 'Compose Multiplatform', detail: 'Шарящийся UI поверх KMP — один Compose на iOS, Android и десктоп' },
+    { name: 'Compose Multiplatform', detail: 'Шарящийся UI поверх KMP — один Compose на iOS, Android, десктоп и веб' },
     { name: 'Android · Kotlin', detail: 'Jetpack Compose, корутины, modern Android-стек' },
     { name: 'iOS · Swift', detail: 'SwiftUI — где можно, UIKit — где нужно' },
     { name: 'Flutter', detail: 'Когда нужна скорость и единая кодовая база' },
