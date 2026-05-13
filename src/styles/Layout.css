@@ -70,22 +70,23 @@
   letter-spacing: -0.005em;
 }
 
-/* Nav */
+/* Nav — floats over the page (top on desktop, bottom on mobile) */
 
 .site-nav {
-  display: none;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: inline-flex;
   align-items: center;
   gap: 4px;
   padding: 4px;
   border-radius: var(--r-full);
-  background: var(--bg-elev);
+  background: oklch(from var(--bg-elev) l c h / 0.92);
   border: 1px solid var(--line);
-}
-
-@media (min-width: 720px) {
-  .site-nav {
-    display: inline-flex;
-  }
+  backdrop-filter: saturate(160%) blur(18px);
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
+  max-width: calc(100vw - 24px);
 }
 
 .site-nav__link {
@@ -109,6 +110,36 @@
   color: var(--ink);
   background: var(--bg-card-solid);
   box-shadow: var(--shadow-soft);
+}
+
+/* Desktop: docked into the header strip */
+@media (min-width: 720px) {
+  .site-nav {
+    top: 14px;
+  }
+}
+
+/* Mobile: floating bottom tab bar */
+@media (max-width: 719px) {
+  .site-nav {
+    top: auto;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+    box-shadow: 0 10px 28px oklch(0 0 0 / 0.32);
+  }
+
+  [data-theme='light'] .site-nav {
+    box-shadow: 0 10px 28px oklch(0 0 0 / 0.12);
+  }
+
+  .site-nav__link {
+    height: 38px;
+    padding-inline: 16px;
+  }
+
+  /* Reserve space under footer so the floating bar doesn't cover the last line */
+  .site:has(.site-nav) .footer {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 96px);
+  }
 }
 
 /* Tools */

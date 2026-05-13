@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useI18n } from '../hooks/useI18n'
 import { useTheme } from '../hooks/useTheme'
 import { LayoutProps } from '../types'
@@ -126,28 +126,47 @@ function ScrollManager() {
 }
 
 function SiteHeader() {
+  return (
+    <header className="site-header">
+      <div className="container site-header__inner">
+        <Link to="/" className="site-logo" aria-label="Monoroh — home">
+          <img
+            src="/media/develop_logo_512x512.png"
+            alt=""
+            width={22}
+            height={22}
+            className="site-logo__mark"
+            decoding="async"
+          />
+          <span className="site-logo__text">monoroh</span>
+        </Link>
+
+        <div className="site-header__tools">
+          <LangToggle />
+          <ThemeToggle />
+        </div>
+      </div>
+    </header>
+  )
+}
+
+function SiteNav() {
   const { t } = useI18n()
   const location = useLocation()
-  const navigate = useNavigate()
   const isHome = location.pathname === '/'
   const active = useActiveSection(isHome)
 
+  if (!isHome) return null
+
   const handleIndex = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    if (isHome) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-      if (window.location.hash) {
-        history.replaceState(null, '', window.location.pathname + window.location.search)
-      }
-    } else {
-      navigate('/')
-      // Defer to next frame so the route mounts before we scroll.
-      requestAnimationFrame(() => window.scrollTo({ top: 0 }))
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search)
     }
   }
 
   const handleAnchor = (id: 'work' | 'about') => (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!isHome) return // let the default `/` + hash navigation happen
     e.preventDefault()
     const el = document.getElementById(id)
     if (!el) return
@@ -166,55 +185,27 @@ function SiteHeader() {
 
   const handleContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    if (isHome) {
-      scrollToContact()
-    } else {
-      navigate('/')
-      requestAnimationFrame(() => requestAnimationFrame(scrollToContact))
-    }
+    scrollToContact()
   }
 
   const cls = (key: ActiveSection) =>
     `site-nav__link${active === key ? ' is-active' : ''}`
 
   return (
-    <header className="site-header">
-      <div className="container site-header__inner">
-        <Link to="/" className="site-logo" aria-label="Monoroh — home">
-          <img
-            src="/media/develop_logo_512x512.png"
-            alt=""
-            width={22}
-            height={22}
-            className="site-logo__mark"
-            decoding="async"
-          />
-          <span className="site-logo__text">monoroh</span>
-        </Link>
-
-        {isHome && (
-          <nav className="site-nav" aria-label="Primary">
-            <a href="/" onClick={handleIndex} className={cls('top')}>
-              {t.nav.index}
-            </a>
-            <a href="/#work" onClick={handleAnchor('work')} className={cls('work')}>
-              {t.nav.work}
-            </a>
-            <a href="/#about" onClick={handleAnchor('about')} className={cls('about')}>
-              {t.nav.about}
-            </a>
-            <a href="#contact" onClick={handleContact} className={cls('contact')}>
-              {t.nav.contact}
-            </a>
-          </nav>
-        )}
-
-        <div className="site-header__tools">
-          <LangToggle />
-          <ThemeToggle />
-        </div>
-      </div>
-    </header>
+    <nav className="site-nav" aria-label="Primary">
+      <a href="/" onClick={handleIndex} className={cls('top')}>
+        {t.nav.index}
+      </a>
+      <a href="/#work" onClick={handleAnchor('work')} className={cls('work')}>
+        {t.nav.work}
+      </a>
+      <a href="/#about" onClick={handleAnchor('about')} className={cls('about')}>
+        {t.nav.about}
+      </a>
+      <a href="#contact" onClick={handleContact} className={cls('contact')}>
+        {t.nav.contact}
+      </a>
+    </nav>
   )
 }
 
@@ -223,6 +214,7 @@ export default function Layout({ children }: LayoutProps) {
     <div className="site">
       <ScrollManager />
       <SiteHeader />
+      <SiteNav />
       <main className="site-main">{children || <Outlet />}</main>
       <Footer />
     </div>
