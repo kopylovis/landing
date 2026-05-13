@@ -426,8 +426,8 @@ export const ru: Translations = {
   hero: {
     statusPrefix: 'Открыт для отдельных проектов',
     headline: {
-      l1: 'Создаю',
-      l2Before: '',
+      l1: '',
+      l2Before: 'Создаю',
       em: 'мультиплатформенные',
       l3: 'мобильные продукты с нативным ощущением.',
     },
