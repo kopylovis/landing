@@ -6,6 +6,7 @@ export default function AboutSection() {
   const header = useReveal<HTMLDivElement>()
   const principlesRow = useReveal<HTMLDivElement>({ rootMargin: '0px 0px -5% 0px' })
   const stackRow = useReveal<HTMLDivElement>({ rootMargin: '0px 0px -5% 0px' })
+  const closer = useReveal<HTMLDivElement>({ rootMargin: '0px 0px -5% 0px' })
   const { t } = useI18n()
 
   return (
@@ -66,6 +67,14 @@ export default function AboutSection() {
               </li>
             ))}
           </ol>
+        </div>
+
+        <div
+          ref={closer.ref}
+          className="reveal about__closer"
+          data-visible={closer.visible}
+        >
+          <p className="about__closer-text">{t.about.closer}</p>
         </div>
       </div>
     </section>

@@ -30,9 +30,7 @@ export interface Translations {
     statusPrefix: string
     headline: { l1: string; l2Before: string; em: string; l3: string }
     lede: {
-      intro: string
-      name: string
-      between1: string
+      before: string
       strong: string
       trailing: string
     }
@@ -49,6 +47,7 @@ export interface Translations {
     stackEyebrow: string
     stackTitle: string
     stackSub: string
+    closer: string
   }
   stack: NamedDetail[]
   footer: {
@@ -121,17 +120,15 @@ export const en: Translations = {
   hero: {
     statusPrefix: 'Open to new projects',
     headline: {
-      l1: 'Mobile engineer',
-      l2Before: 'crafting',
-      em: 'multiplatform',
-      l3: 'products that feel native.',
+      l1: '',
+      l2Before: '',
+      em: 'Multiplatform',
+      l3: 'apps that feel native.',
     },
     lede: {
-      intro: "I'm",
-      name: 'Ivan Kopylov',
-      between1: ' — ten years shipping products with ',
+      before: 'I build apps for iOS, Android, desktop and web — often on ',
       strong: 'Kotlin Multiplatform',
-      trailing: ' for iOS, Android, desktop and web.',
+      trailing: '.',
     },
     ctaWork: 'See selected work',
     ctaContact: 'Get in touch',
@@ -152,9 +149,9 @@ export const en: Translations = {
 
   about: {
     eyebrow: 'About',
-    title: "Engineer with a designer's eye and a shipper's mindset.",
+    title: 'Engineer with an eye for detail and a sense for product.',
     lede:
-      'I build mobile products from architecture to App Store. A decade across native iOS, Android, and Kotlin Multiplatform — with the design and product instincts to round out the full loop.',
+      "I'm Ivan Kopylov. I design and ship apps in full — from architecture to publishing in the stores, with care for the product and the user experience. 10+ years on iOS, Android and Kotlin Multiplatform.",
     principles: [
       {
         title: 'Architecture-first',
@@ -176,6 +173,8 @@ export const en: Translations = {
     stackTitle: 'Mobile, end-to-end.',
     stackSub:
       'The tools I trust to ship production-grade products. Picked, not collected.',
+    closer:
+      'Care for your project — from the first line of code to the final \u201Ccan we nudge that button just a pixel?\u201D',
   },
 
   stack: [
@@ -423,16 +422,14 @@ export const ru: Translations = {
     statusPrefix: 'Открыт для новых проектов',
     headline: {
       l1: '',
-      l2Before: 'Создаю',
-      em: 'мультиплатформенные',
-      l3: 'мобильные приложения, которые ощущаются нативно.',
+      l2Before: '',
+      em: 'Мультиплатформенные',
+      l3: 'приложения, которые ощущаются нативно.',
     },
     lede: {
-      intro: 'Я —',
-      name: 'Иван Копылов',
-      between1: '. Десять лет делаю продукты на ',
+      before: 'Разрабатываю приложения для iOS, Android, десктопа и веба, в том числе на ',
       strong: 'Kotlin Multiplatform',
-      trailing: ' — для iOS, Android, десктопа и веба.',
+      trailing: '.',
     },
     ctaWork: 'Смотреть проекты',
     ctaContact: 'Написать',
@@ -453,36 +450,38 @@ export const ru: Translations = {
 
   about: {
     eyebrow: 'Обо мне',
-    title: 'Инженер с дизайн-вкусом и продуктовой чуйкой.',
+    title: 'Инженер с вниманием к деталям и продуктовым чутьём.',
     lede:
-      'Делаю мобильное целиком — от архитектуры до пуша в стор. Десять лет в нативных iOS, Android и Kotlin Multiplatform. И достаточно продуктовой чуйки, чтобы закрывать всю петлю самому.',
+      'Я — Иван Копылов. Проектирую и выпускаю приложения целиком — от архитектуры до публикации в сторах, с вниманием к продукту и пользовательскому опыту. Более 10 лет опыта с iOS, Android и Kotlin Multiplatform.',
     principles: [
       {
         title: 'Архитектура — это фича',
         body:
-          'Чистая архитектура — это фича, а не оверхед: код тестируется, новые ребята быстро онбордятся, ничего не разваливается. Доменная логика живёт в KMP и не зависит от платформы.',
+          'Хорошая архитектура — не про усложнение, а про спокойную разработку без хаоса по мере роста продукта. Бизнес-логика живёт в Kotlin Multiplatform и шарится между платформами.',
       },
       {
-        title: 'Шарим UI, нативно — где это правда нужно',
+        title: 'Общий UI — там, где это оправданно',
         body:
-          'Compose Multiplatform тащит общий UI на iOS, Android, десктоп и веб. Спускаюсь в SwiftUI или нативный Compose только там, где конкретный экран это реально заслужил.',
+          'С Compose Multiplatform один UI для iOS, Android, десктопа и веба. SwiftUI или нативный Compose — только там, где конкретный экран это реально заслужил.',
       },
       {
-        title: 'Релизить и мерить',
+        title: 'Релизы без хаоса',
         body:
-          'Оптимизирую время до фидбека. CI/CD, аналитика по делу, crash-free стабильность — а уже потом вылизывание пикселей.',
+          'Быстрые релизы, CI/CD, понятная аналитика и стабильная работа продукта — а уже потом полировка пикселей.',
       },
     ],
     stackEyebrow: 'Стек',
     stackTitle: 'Мобайл от и до.',
     stackSub:
-      'Инструменты, на которых релижу продакшен. Выбраны под задачи, а не для коллекции.',
+      'Инструменты, с которыми выпускаю реальные продукты. Выбираю под задачи, а не для коллекции.',
+    closer:
+      'Забота о вашем проекте — от первой строчки кода до последнего \u00ABа можно ещё кнопочку подвинуть?\u00BB',
   },
 
   stack: [
-    { name: 'Kotlin Multiplatform', detail: 'Бизнес-логика — одна, на всех платформах' },
-    { name: 'Compose Multiplatform', detail: 'Шарящийся UI поверх KMP — один Compose на iOS, Android, десктоп и веб' },
-    { name: 'Android · Kotlin', detail: 'Jetpack Compose, корутины, modern Android-стек' },
+    { name: 'Kotlin Multiplatform', detail: 'Бизнес-логика — одна на всех платформах' },
+    { name: 'Compose Multiplatform', detail: 'Единый Compose-интерфейс для iOS, Android, десктопа и веба — без лишнего дублирования' },
+    { name: 'Android · Kotlin', detail: 'Jetpack Compose, корутины и актуальный Android-стек — всё, что нужно для стабильного продукта' },
     { name: 'iOS · Swift', detail: 'SwiftUI — где можно, UIKit — где нужно' },
     { name: 'Flutter', detail: 'Когда нужна скорость и единая кодовая база' },
   ],

@@ -192,20 +192,22 @@ function SiteNav() {
     `site-nav__link${active === key ? ' is-active' : ''}`
 
   return (
-    <nav className="site-nav" aria-label="Primary">
-      <a href="/" onClick={handleIndex} className={cls('top')}>
-        {t.nav.index}
-      </a>
-      <a href="/#work" onClick={handleAnchor('work')} className={cls('work')}>
-        {t.nav.work}
-      </a>
-      <a href="/#about" onClick={handleAnchor('about')} className={cls('about')}>
-        {t.nav.about}
-      </a>
-      <a href="#contact" onClick={handleContact} className={cls('contact')}>
-        {t.nav.contact}
-      </a>
-    </nav>
+    <div className="site-nav-dock" aria-hidden="false">
+      <nav className="site-nav" aria-label="Primary">
+        <a href="/" onClick={handleIndex} className={cls('top')}>
+          {t.nav.index}
+        </a>
+        <a href="/#work" onClick={handleAnchor('work')} className={cls('work')}>
+          {t.nav.work}
+        </a>
+        <a href="/#about" onClick={handleAnchor('about')} className={cls('about')}>
+          {t.nav.about}
+        </a>
+        <a href="#contact" onClick={handleContact} className={cls('contact')}>
+          {t.nav.contact}
+        </a>
+      </nav>
+    </div>
   )
 }
 

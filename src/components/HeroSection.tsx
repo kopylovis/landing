@@ -35,8 +35,7 @@ export default function HeroSection() {
           </h1>
 
           <p className="hero__lede">
-            {t.hero.lede.intro} {t.hero.lede.name}
-            {t.hero.lede.between1}
+            {t.hero.lede.before}
             <span className="hero__lede-strong">{t.hero.lede.strong}</span>
             {t.hero.lede.trailing}
           </p>

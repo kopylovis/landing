@@ -70,13 +70,34 @@
   letter-spacing: -0.005em;
 }
 
-/* Nav — floats over the page (top on desktop, bottom on mobile) */
+/* Nav — floats over the page (top on desktop, bottom on mobile)
+   The pill itself stays in normal flow inside a fixed dock; this way iOS Safari
+   doesn't re-anchor it during URL-bar animations (when env(safe-area-inset-bottom)
+   changes), which was causing visible jitter while scrolling. */
+
+.site-nav-dock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: center;
+  padding-inline: 12px;
+  pointer-events: none; /* let scroll & taps pass through empty space */
+
+  /* GPU compositing keeps the dock smooth during scroll on iOS Safari. */
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.site-nav-dock > .site-nav {
+  pointer-events: auto;
+}
 
 .site-nav {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 60;
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -84,9 +105,9 @@
   border-radius: var(--r-full);
   background: oklch(from var(--bg-elev) l c h / 0.92);
   border: 1px solid var(--line);
-  backdrop-filter: saturate(160%) blur(18px);
-  -webkit-backdrop-filter: saturate(160%) blur(18px);
-  max-width: calc(100vw - 24px);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  max-width: 100%;
 }
 
 .site-nav__link {
@@ -113,18 +134,22 @@
   box-shadow: var(--shadow-soft);
 }
 
-/* Desktop: docked into the header strip */
+/* Desktop: dock pinned to the top, pill sits 14px below the viewport edge */
 @media (min-width: 720px) {
-  .site-nav {
-    top: 14px;
+  .site-nav-dock {
+    top: 0;
+    padding-top: 14px;
   }
 }
 
-/* Mobile: floating bottom tab bar */
+/* Mobile: dock pinned to the bottom; padding handles the safe area */
 @media (max-width: 719px) {
+  .site-nav-dock {
+    bottom: 0;
+    padding-bottom: max(14px, calc(env(safe-area-inset-bottom, 0px) + 14px));
+  }
+
   .site-nav {
-    top: auto;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
     box-shadow: 0 10px 28px oklch(0 0 0 / 0.32);
   }
 
@@ -138,7 +163,7 @@
   }
 
   /* Reserve space under footer so the floating bar doesn't cover the last line */
-  .site:has(.site-nav) .footer {
+  .site:has(.site-nav-dock) .footer {
     padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 96px);
   }
 }
