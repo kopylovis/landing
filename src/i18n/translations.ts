@@ -119,7 +119,7 @@ export const en: Translations = {
   },
 
   hero: {
-    statusPrefix: 'Available for select work',
+    statusPrefix: 'Open to new projects',
     headline: {
       l1: 'Mobile engineer',
       l2Before: 'crafting',
@@ -129,9 +129,9 @@ export const en: Translations = {
     lede: {
       intro: "I'm",
       name: 'Ivan Kopylov',
-      between1: ' — shipping production apps with ',
+      between1: ' — ten years shipping products with ',
       strong: 'Kotlin Multiplatform',
-      trailing: ' across iOS, Android, desktop and web.',
+      trailing: ' for iOS, Android, desktop and web.',
     },
     ctaWork: 'See selected work',
     ctaContact: 'Get in touch',
@@ -420,19 +420,19 @@ export const ru: Translations = {
   },
 
   hero: {
-    statusPrefix: 'Беру отдельные проекты',
+    statusPrefix: 'Открыт для новых проектов',
     headline: {
       l1: '',
-      l2Before: 'Делаю',
+      l2Before: 'Создаю',
       em: 'мультиплатформенные',
       l3: 'мобильные приложения, которые ощущаются нативно.',
     },
     lede: {
       intro: 'Я —',
       name: 'Иван Копылов',
-      between1: '. Десять лет в проде на ',
+      between1: '. Десять лет делаю продукты на ',
       strong: 'Kotlin Multiplatform',
-      trailing: ' — iOS, Android, десктоп и веб.',
+      trailing: ' — для iOS, Android, десктопа и веба.',
     },
     ctaWork: 'Смотреть проекты',
     ctaContact: 'Написать',

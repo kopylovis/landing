@@ -99,6 +99,7 @@
   font-weight: 500;
   color: var(--ink-mute);
   border-radius: var(--r-full);
+  white-space: nowrap;
   transition: color var(--t-fast), background var(--t-fast);
 }
 
@@ -133,7 +134,7 @@
 
   .site-nav__link {
     height: 38px;
-    padding-inline: 16px;
+    padding-inline: 14px;
   }
 
   /* Reserve space under footer so the floating bar doesn't cover the last line */
